@@ -1,0 +1,17 @@
+[slaves:vars]
+ansible_connection=ssh
+ansible_user=pirate
+ansible_ssh_pass=hypriot
+
+[master]
+kube
+
+[slaves]
+node02
+node03
+node04
+node05
+
+[all:children]
+master
+slaves

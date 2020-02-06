@@ -1,0 +1,38 @@
+#cloud-config
+
+hostname: pihole.home
+manage_etc_hosts: true
+apt_preserve_sources_list: true
+
+users:
+  - name: cbruner
+    primary-group: users
+    shell: /bin/bash
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    groups: cbruner,video,users,input,docker
+    ssh-import-id: None
+    lock_passwd: true
+    ssh-authorized-keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDDUQvKIZGnWnyC+yPsUJI6xqW4ZJjt+t164OOpl3IU/4tXzQWO2zpZSu/kIkLxSDVlIpEHm1QYCxoDtdX0M5xHfHyYAlArJXX0FQtLKRnJJQfvzuh6Ea5ffiADNhZKbrj1nNDclRAatVU0eetsmeIJ3tjTm9YwKAFf9yO5NpuXVluERjBi3gYkQem7decazSEUimgtTNP75FKzW0nKAGa5eTySTha9P/nDgOluSQytkqlFOyPKeGm5Gyy93PGFFWYRW2BloViMOTHE2ubtda31krzOD9m5s58wBCnOciE1YIDJNS7AKf/ZFAseyiAOhSNi2fVe4wKA3QjIXFPsRNaJ colin.d.bruner@gmail.com
+
+package_upgrade: false
+
+# Static IP address
+write_files:
+  - content: |
+      persistent
+      # Generate Stable Private IPv6 Addresses instead of hardware based ones
+      slaac private
+      # static IP configuration:
+      interface eth0
+      static ip_address=192.168.1.5/24
+      static routers=192.168.1.1
+      static domain_name_servers=192.168.1.1 8.8.8.8
+    path: /etc/dhcpcd.conf
+# These commands will be ran once on first boot only
+runcmd:
+  # Pickup the hostname changes
+  - 'systemctl restart avahi-daemon'
+
+  # Activate WiFi interface
+#  - 'ifup wlan0'
