@@ -6,6 +6,9 @@ ansible_ssh_pass=hypriot
 [master]
 kube
 
+[baremetal]
+ratri
+
 [slaves]
 node02
 node03
