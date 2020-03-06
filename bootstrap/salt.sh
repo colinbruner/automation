@@ -7,6 +7,19 @@ function install_salt_minion_raspbian() {
     fi
     apt-get update -y
     apt-get install -y salt-common/stable salt-minion/stable
+
+}
+
+function install_salt_minion_ubuntu() {
+    PUBKEY="https://repo.saltstack.com/apt/ubuntu/18.04/amd64/latest/SALTSTACK-GPG-KEY.pub"
+    wget -O - $PUBKEY | apt-key add -
+    REPO="deb http://repo.saltstack.com/apt/ubuntu/18.04/amd64/latest bionic main"
+
+    if [[ ! $(grep "$REPO" /etc/apt/sources.list) ]]; then
+        echo "$REPO" >> /etc/apt/sources.list
+    fi
+    apt-get update -y
+    apt-get install -y salt-minion
 }
 
 function install_salt_minion_centos() {
@@ -31,6 +44,9 @@ function install_salt_minion() {
         elif [[ $distro =~ "Raspbian"* ]]; then
             # Install Salt on Raspberry Pi's
             install_salt_minion_raspbian
+        elif [[ $distro =~ "Ubuntu" ]]; then
+            # Install Salt on Ubuntu
+            install_salt_minion_ubuntu
         fi
     fi
 }

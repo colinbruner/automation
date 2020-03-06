@@ -1,13 +1,14 @@
-[slaves:vars]
-ansible_connection=ssh
-ansible_user=pirate
-ansible_ssh_pass=hypriot
+[baremetal]
+salt
+pepper
 
 [master]
 kube
 
-[baremetal]
-ratri
+[slaves:vars]
+ansible_connection=ssh
+ansible_user=pirate
+ansible_ssh_pass=hypriot
 
 [slaves]
 node02

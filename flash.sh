@@ -1,7 +1,8 @@
 #!/bin/bash
 
 CONFIG_DIR="configs/flash"
-HOSTS="pihole" # pihole raspberry pi flashing
+HOSTS="unms" # pihole raspberry pi flashing
+#HOSTS="pihole" # pihole raspberry pi flashing
 #HOSTS="node01 node02 node03 node04 node05" # kubernetes worker nodes
 
 FLASH=$(which flash)
