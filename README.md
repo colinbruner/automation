@@ -3,7 +3,7 @@ Personal automation for raspberry pi kubernetes cluster and pi hole boxes.
 
 # Directory Layout
 * k3s - directory for k3s deployment apps
-* scripts - 
+* scripts - scripts for installing and bootstraping things using ansible adhoc script execution
 * configs - cloud-init configs for bootstraping images on raspberry (not currently used)
 
 # k3s cluster
