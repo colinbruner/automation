@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: web
+  namespace: homepage
+  labels:
+    app: web
+spec:
+  type: NodePort
+  ports:
+    - port: 443
+      nodePort: 30443
+      name: https
+  selector:
+    app: web

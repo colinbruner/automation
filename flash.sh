@@ -1,15 +1,17 @@
 #!/bin/bash
 
 CONFIG_DIR="configs/flash"
-HOSTS="unms" # pihole raspberry pi flashing
+#HOSTS="unms" # pihole raspberry pi flashing
 #HOSTS="pihole" # pihole raspberry pi flashing
-#HOSTS="node01 node02 node03 node04 node05" # kubernetes worker nodes
+HOSTS="kube1 node1 node2 node3 node4" # kubernetes worker nodes
 
 FLASH=$(which flash)
 if [[ $? != 0 ]]; then
     echo "Please ensure 'flash' is installed and executable within your PATH."
     exit 1
 fi
+
+export PATH="/usr/sbin/:$PATH"
 
 if [[ ! -z $1 ]]; then
     IMAGE=$1

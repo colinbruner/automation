@@ -1,6 +1,6 @@
 #cloud-config
 
-hostname: node02.home
+hostname: node4.home
 manage_etc_hosts: true
 apt_preserve_sources_list: true
 
