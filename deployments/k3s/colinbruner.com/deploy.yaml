@@ -19,7 +19,14 @@ spec:
         - name: registrykey
       containers:
         - name: web
-          image: cbruner/homepage
+          image: cbruner/homepage:v1.0.1
           ports:
             - containerPort: 80
             - containerPort: 443
+          volumeMounts:
+            - name: tls-volume
+              mountPath: /etc/nginx/secrets
+      volumes:
+        - name: tls-volume
+          secret:
+            secretName: homepage-tls
