@@ -7,6 +7,11 @@ metadata:
     app: web
 spec:
   replicas: 5
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 20%
   selector:
     matchLabels:
       app: web
@@ -19,13 +24,20 @@ spec:
         - name: registrykey
       containers:
         - name: web
-          image: cbruner/homepage:v1.0.1
+          image: cbruner/homepage:v1.0.2
           ports:
             - containerPort: 80
             - containerPort: 443
           volumeMounts:
             - name: tls-volume
               mountPath: /etc/nginx/secrets
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            successThreshold: 1
       volumes:
         - name: tls-volume
           secret:
