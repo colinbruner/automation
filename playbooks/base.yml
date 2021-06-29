@@ -1,0 +1,20 @@
+---
+
+- name: 
+  hosts: all
+  become: true
+  gather_facts: false
+  vars_files:
+    - vars/base/all.yml
+
+  tasks:
+    - name: Upgrade all installed packages
+      dnf:
+        name: "*"
+        state: latest
+
+    - name: Install all required packages
+      dnf:
+        name: "{{ packages }}"
+        state: installed
+

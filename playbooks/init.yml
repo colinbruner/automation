@@ -1,0 +1,11 @@
+---
+
+- name: 
+  hosts: all
+  become: true
+  gather_facts: false
+
+  tasks:
+    # Required for additional ansible runs
+    - name: Install Python3
+      raw: "dnf install python3 -y"
