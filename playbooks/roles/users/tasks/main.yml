@@ -1,0 +1,25 @@
+---
+# 1. Create admin group
+# 2. Create admin user
+# 3. Modify sudoers file for NOPASSWD sudo
+
+- name: Add 'admin' group
+  ansible.builtin.group:
+    name: admin
+    state: present
+
+- name: Add 'colin.bruner' user account
+  ansible.builtin.user:
+    name: colin.bruner
+    comment: Colin Bruner
+    shell: /bin/bash
+    groups: admin
+    append: yes
+
+- name: Ensure 'admin' group has NOPASSWD sudo in sudoers file
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers
+    state: present
+    regexp: '^%admin ALL='
+    line: '%admin ALL=(ALL) NOPASSWD: ALL'
+    validate: /usr/sbin/visudo -cf %s

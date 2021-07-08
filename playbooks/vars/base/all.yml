@@ -3,3 +3,13 @@
 packages:
   - python3
   - nmap-ncat
+
+firewalld_services:
+  - service: cockpit
+    state: enabled
+  - service: dhcpv6-client
+    state: enabled
+  - service: ssh
+    state: enabled
+  - service: https
+    state: enabled

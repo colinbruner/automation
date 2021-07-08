@@ -18,3 +18,11 @@
         name: "{{ packages }}"
         state: installed
 
+    - name: Include Users Role
+      include_role:
+        name: users
+
+    - name: Include Firewalld Role
+      include_role:
+        name: firewalld
+

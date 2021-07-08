@@ -1,0 +1,8 @@
+
+- name: Enable necessary firewalld services
+  ansible.posix.firewalld:
+    service: "{{ item.service }}"
+    permanent: yes
+    immediate: yes
+    state: "{{ item.state }}"
+  loop: "{{ firewalld_services }}"
